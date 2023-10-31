@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.restassured.http.ContentType;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -18,6 +19,7 @@ public class RestAssuredSample {
     private String url = "https://reqres.in/api/users";
 
     @Test
+	@DisplayName("http get")
     public void getPageOneTest(){
         given().
                 param("page", "1").
@@ -29,11 +31,13 @@ public class RestAssuredSample {
     }
 
     @Test
+	@DisplayName("http get")
     public void getUserTest() {
         get(url + "/2").then().body("data.id", equalTo(2));
     }
 
     @Test
+	@DisplayName("http post")
     public void postUserTest(){
     	Map<String, Object> requestParams = new HashMap<String, Object>();
         requestParams.put("name", "Alice");
@@ -49,6 +53,7 @@ public class RestAssuredSample {
     }
 
     @Test
+	@DisplayName("http put")
     public void putUserTest(){
         Map<String, Object> requestParams = new HashMap<String, Object>();
         requestParams.put("name", "Bob");
@@ -65,6 +70,7 @@ public class RestAssuredSample {
     }
 
     @Test
+	@DisplayName("http delete")
     public void deleteUserTest(){
         when().
                 delete(url + "/2").
