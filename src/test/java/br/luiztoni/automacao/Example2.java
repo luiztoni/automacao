@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.Objects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -24,12 +24,18 @@ import io.cucumber.java.en.When;
 
 public class Example2 {
 
-	private final WebDriver driver = new ChromeDriver();
+	private final ChromeDriver driver = new ChromeDriver();
 
 	@Given("I am on the Google page")
 	public void i_am_on_the_google_search_page() {
 		driver.get("https://www.google.com");
 		driver.manage().window().maximize();
+		var map = new HashMap<String, Object>();
+		map.put("width", 390);
+		map.put("height", 844);
+		map.put("deviceScaleFactor", 100);
+		map.put("mobile", true);
+		driver.executeCdpCommand("Emulation.setDeviceMetricsOverride", map);
 	}
 
 	@When("I search for page {string}")

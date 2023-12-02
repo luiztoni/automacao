@@ -20,6 +20,7 @@ public class Example1 {
 
 	@Given("I am on the Google search page")
 	public void i_am_on_the_google_search_page() {
+		driver.manage().window().maximize();
 		driver.get("https://www.google.com");
 	}
 
